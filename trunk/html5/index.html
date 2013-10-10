@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Sort Algorithms</title>
+        <meta name="description" content="">
+        <meta name="author" content="Hakim El Hattab">
+        <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
+    </head>
+
+    <body>
+        <p class="intro">Sort Algorithms</p>
+        <table class="applets"></table>
+
+        <ul class="nav">
+            <li id="random"><a>Random</a></li>
+            <li id="reversed"><a>Reversed</a></li>
+            <li id="repeated"><a>Repeated</a></li>
+            <li id="sorted"><a>Sorted</a></li>
+        </ul>
+        <script>
+            // basic paging logic to demo the buttons
+            var f1 = document.getElementById('random');
+            var f2 = document.getElementById('reversed');
+            var f3 = document.getElementById('repeated');
+            var f4 = document.getElementById('sorted');
+
+            var names = ['InsertionSort', 'BubbleSort', 'ShuffleSort', 'QuickSort', 'IQuickSort'];
+            var strategies = ['edu.mum.util.sort.InsertionSort', 'edu.mum.util.sort.BubbleSort', 'edu.mum.util.sort.ShuffleSort', 'edu.mum.util.sort.QuickSort', 'edu.mum.util.sort.IQuickSort'];
+
+            f1.onclick = slide.bind(this, 0);
+            f2.onclick = slide.bind(this, 1);
+            f3.onclick = slide.bind(this, 2);
+            f4.onclick = slide.bind(this, 3);
+
+            function slide(offset) {
+                document.querySelector('.applets').innerHTML = getAlgo(offset);
+
+//                pr.setAttribute('data-state', index === 0 ? 'disabled' : '');
+//                pl.setAttribute('data-state', index === total - 1 ? 'disabled' : '');
+            }
+
+            function getAlgo(fill) {
+                var ret = '<tr>';
+                for (var i = 0; i < strategies.length; i++) {
+                    ret += '<td>' + names[i] + '</td>';
+                }
+                ret += '<tr>';
+                for (var i = 0; i < strategies.length; i++) {
+                    ret += '<td>';
+                    ret += '<applet codebase="classes" code="edu/mum/applet/LineApplet.class" width=100 height=200>';
+                    ret += '<param name="strategy" value="' + strategies[i] + '" />';
+                    ret += '<param name="fill" value="' + fill + '" />';
+                    ret += '</applet>';
+                    ret += '</td>';
+                }
+                return ret;
+
+            }
+            slide(0);
+        </script>
+
+        <!-- Third party scripts and sharing UI -->
+        <style type="text/css" media="screen">
+            .intro {
+                position: absolute;
+                left: 25px;
+                top 8px;
+
+                font-size: 16px;
+                color: #fff;
+            }
+        </style>
+
+        <script>
+            var _gaq = [['_setAccount', 'UA-15240703-1'], ['_trackPageview']];
+            (function(d, t) {
+                var g = d.createElement(t),
+                        s = d.getElementsByTagName(t)[0];
+                g.async = true;
+                g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                s.parentNode.insertBefore(g, s);
+            })(document, 'script');
+        </script>
+    </body>
+</html>

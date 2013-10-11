@@ -45,4 +45,25 @@ public class InsertionSort
         }
         finish();
     }
+
+    void sort(int size) {
+        if (size > 1) {
+            sort(size - 1);
+            insert(arr[size - 1], size - 1);
+        }
+    }
+
+    private void insert(int m, int size) {
+        int j = 0;
+        for (j = 0; j < size; j++) {
+            if (isGreater(arr[j], m)) {
+                break;
+            }
+        }
+
+        for (int k = size - 1; k >= j; k--) {
+            swap(k + 1, k);
+        }
+        arr[j] = m;
+    }
 }

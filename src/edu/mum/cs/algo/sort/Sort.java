@@ -71,12 +71,23 @@ public abstract class Sort {
     }
 
     /**
+     *
+     * @return
+     * @since 1.1
+     * @see #swap(int, int)
+     */
+    public int getSwaps() {
+        return swaps;
+    }
+
+    /**
      * Exchange position of two integer values.
      * <p/>
      * @param i index of the value to be exchanged
      * @param j index of the value to be exchanged
      */
     protected final void swap(int i, int j) {
+        swaps++;
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
@@ -89,9 +100,7 @@ public abstract class Sort {
     }
 
     protected final void notifyCursor(int i) {
-        if (listener != null) {
-            listener.cursorsChanged(i, -1);
-        }
+        notifyCursor(i, -1);
     }
 
     protected final void notifyPause() {
@@ -221,4 +230,5 @@ public abstract class Sort {
      * Number of comparisons used by the algorithm to sort the array
      */
     protected int comparisons;
+    protected int swaps;
 }

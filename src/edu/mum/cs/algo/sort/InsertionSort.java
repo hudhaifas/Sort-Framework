@@ -15,8 +15,6 @@
  */
 package edu.mum.cs.algo.sort;
 
-import java.util.Arrays;
-
 /**
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
@@ -25,18 +23,6 @@ import java.util.Arrays;
  */
 public class InsertionSort
         extends Sort {
-
-    public static void main(String[] args) {
-        int[] a = {2, 1, 5, 0, 5, 4};
-        System.out.println(Arrays.toString(a));
-
-        InsertionSort s = new InsertionSort();
-        s.reset(a);
-        s.sort2();
-
-        System.out.println(Arrays.toString(a));
-        System.out.println("Comparisons: " + s.getComparisons());
-    }
 
     @Override
     public String getName() {
@@ -50,31 +36,13 @@ public class InsertionSort
         for (int i = 1; i < arr.length; i++) {
             temp = arr[i];
             int j;
-            for (j = i; j > 0 && temp < arr[j - 1]; j--) {
-                arr[j] = arr[j - 1];
+            for (j = i; j > 0 && isLess(temp, arr[j - 1]); j--) {
+                swap(j, j - 1);
                 notifyCursor(i, j);
             }
             arr[j] = temp;
             notifyCursor(i);
         }
         finish();
-    }
-
-    @Deprecated
-    public void sort2() {
-        for (int i = 0; i < arr.length - 1; i++) {
-            if (isGreater(arr[i], arr[i + 1])) {
-                swap(i, i + 1);
-                for (int j = i; j > 0; j--) {
-                    if (isLess(arr[j], arr[j - 1])) {
-                        swap(j, j - 1);
-                        notifyCursor(i, j);
-                    } else {
-                        break;
-                    }
-                }
-            }
-            notifyCursor(i, -1);
-        }
     }
 }

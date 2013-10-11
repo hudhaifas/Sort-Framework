@@ -1,34 +1,32 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2013 Hudhaifa Shatnawi
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package edu.mum.cs.algo.sort;
 
-import java.util.Arrays;
-
 /**
+ * Implements an algorithm that explains how to sort array of size 4 using ONLY 5 comparisons operations.
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Oct 8, 2013 - 9:32:46 PM
  */
-public class Sort4
+public class FourSort
         extends Sort {
-
-    public static void main(String[] args) {
-        int[] a = {2, 1, 5, 0};
-        System.out.println(Arrays.toString(a));
-
-        Sort4 s = new Sort4();
-        s.reset(a);
-        s.sort();
-
-        System.out.println(Arrays.toString(a));
-        System.out.println("Comparisons: " + s.getComparisons());
-    }
 
     @Override
     public String getName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "FourSort";
     }
 
     @Override
@@ -74,6 +72,7 @@ public class Sort4
     }
 
     protected void swap(int[] a, int i, int j) {
+        swaps++;
         int temp = a[i];
         a[i] = a[j];
         a[j] = temp;

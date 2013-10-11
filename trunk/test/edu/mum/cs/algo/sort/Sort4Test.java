@@ -24,25 +24,24 @@ import static org.junit.Assert.assertArrayEquals;
 /**
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
- * @version 1.0, Oct 11, 2013 - 8:45:27 AM
+ * @version 1.0, Oct 11, 2013 - 8:54:43 AM
  */
-public class BubbleSortTest {
+public class Sort4Test {
 
-    public BubbleSortTest() {
+    public Sort4Test() {
     }
 
     @Before
     public void setUp() {
-        instance = new BubbleSort();
+        instance = new FourSort();
     }
 
     @After
     public void tearDown() {
-        instance = null;
     }
 
     /**
-     * Test of sort method, of class BubbleSort.
+     * Test of sort method, of class FourSort.
      */
     @Test
     public void testSort() {
@@ -57,7 +56,7 @@ public class BubbleSortTest {
 
         assertArrayEquals(a, b);
     }
-    private BubbleSort instance;
-    private int[] a = {2, 1, 5, 0, 5, 4};
-    private int[] b = {0, 1, 2, 4, 5, 5};
+    private FourSort instance;
+    private int[] a = {2, 1, 5, 0};
+    private int[] b = {0, 1, 2, 5};
 }

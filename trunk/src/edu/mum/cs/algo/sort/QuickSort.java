@@ -37,20 +37,25 @@ public class QuickSort
         int i = left;
         int j = right;
         notifyCursor(i, j);
+        
         // Get the pivot element from the middle of the list
         int pivot = arr[left + (right - left) / 2];
+        
         // Divide into two lists
         while (i <= j) {
+            
             // If the current value from the left list is smaller then the pivot
             // element then get the next element from the left list
-            while (arr[i] < pivot) {
+            while (isLess(arr[i], pivot)) {
                 i++;
             }
+            
             // If the current value from the right list is larger then the pivot
             // element then get the next element from the right list
-            while (arr[j] > pivot) {
+            while (isGreater(arr[j], pivot)) {
                 j--;
             }
+            
             // If we have found a values in the left list which is larger then
             // the pivot element and if we have found a value in the right list
             // which is smaller then the pivot element then we swap the
@@ -63,10 +68,12 @@ public class QuickSort
                 notifyPause();
             }
         }
+        
         // Recursion
         if (left < j) {
             quickSort(left, j);
         }
+
         if (i < right) {
             quickSort(i, right);
         }

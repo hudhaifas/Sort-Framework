@@ -91,8 +91,8 @@ public class IQuickSort
         for (int i = left + 1; i <= right; i++) {
             temp = arr[i];
             int j;
-            for (j = i; j > 0 && temp < arr[j - 1]; j--) {
-                arr[j] = arr[j - 1];
+            for (j = i; j > 0 && isLess(temp, arr[j - 1]); j--) {
+                swap(j, j - 1);
                 notifyCursor(i, j);
             }
             arr[j] = temp;

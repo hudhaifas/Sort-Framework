@@ -32,7 +32,7 @@ public class BubbleSort
     public void sort() {
         for (int i = arr.length; --i >= 0;) {
             for (int j = 0; j < i; j++) {
-                if (arr[j] > arr[j + 1]) {
+                if (isGreater(arr[j], arr[j + 1])) {
                     swap(j, j + 1);
                     notifyCursor(i, j);
                 }

@@ -32,12 +32,12 @@ public class ShuffleSort
     public void sort() {
         for (int i = 0; i < arr.length; i++) {
             for (int j = arr.length - 1; j > i; j--) {
-                if (arr[j] < arr[j - 1]) {
+                if (isLess(arr[j], arr[j - 1])) {
                     swap(j, j - 1);
                     notifyCursor(i, j);
                 }
             }
-            notifyCursor(i, -1);
+            notifyCursor(i);
         }
         finish();
     }

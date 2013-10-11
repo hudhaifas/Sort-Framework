@@ -164,6 +164,19 @@ public abstract class Sort {
      * @param a value to be used in the comparison operation
      * @param b value to be used in the comparison operation
      * <p/>
+     * @return <code>true</code> if a is <b>not</b> equal to b, <code>false</code>
+     */
+    protected final boolean isNotEqual(int a, int b) {
+        comparisons++;
+        return a != b;
+    }
+
+    /**
+     * Compare two values
+     * <p/>
+     * @param a value to be used in the comparison operation
+     * @param b value to be used in the comparison operation
+     * <p/>
      * @return <code>true</code> if a is less than or equal to b, <code>false</code>
      */
     protected final boolean isLessEqual(int a, int b) {

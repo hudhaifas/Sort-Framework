@@ -57,6 +57,23 @@ public class InsertionSortTest {
 
         assertArrayEquals(a, b);
     }
+
+    /**
+     * Test of sort method, of class InsertionSort.
+     */
+    @Test
+    public void testSort2() {
+        System.out.println("Recursive sort");
+
+        instance.reset(a);
+        instance.sort(a.length);
+
+        System.out.println("Array size: " + a.length);
+        System.out.println("# Comparisons: " + instance.getComparisons());
+        System.out.println("# Swaps: " + instance.getSwaps());
+
+        assertArrayEquals(a, b);
+    }
     private InsertionSort instance;
     private int[] a = {2, 1, 5, 0, 5, 4};
     private int[] b = {0, 1, 2, 4, 5, 5};

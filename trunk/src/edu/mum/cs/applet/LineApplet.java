@@ -51,4 +51,12 @@ public class LineApplet
             g.drawLine(0, y, width, y);
         }
     }
+
+    @Override
+    protected void drawSwaps(Graphics g, int swaps) {
+    }
+
+    @Override
+    protected void drawComparisons(Graphics g, int comparisons) {
+    }
 }

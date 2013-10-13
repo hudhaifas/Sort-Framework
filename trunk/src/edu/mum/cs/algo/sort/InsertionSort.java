@@ -55,7 +55,7 @@ public class InsertionSort
 
     private void insert(int m, int size) {
         int j = 0;
-        for (j = 0; j < size; j++) {
+        for (; j < size; j++) {
             if (isGreater(arr[j], m)) {
                 break;
             }

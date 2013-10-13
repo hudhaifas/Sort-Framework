@@ -15,7 +15,7 @@
  */
 package edu.mum.cs.applet;
 
-import edu.mum.cs.util.RandomArray;
+import edu.mum.cs.util.ArrayUtil;
 import edu.mum.cs.algo.sort.Sort;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -33,7 +33,7 @@ import javax.swing.JApplet;
  */
 public abstract class SortApplet
         extends JApplet
-        implements MouseListener, Runnable, Sort.ArrayChangeListener {
+        implements Runnable, MouseListener, Sort.ArrayChangeListener {
 
     @Override
     public void cursorsChanged(int i, int j) {
@@ -51,6 +51,17 @@ public abstract class SortApplet
     @Override
     public void requestPause() {
         cursorsChanged(masterCursor, slaveCursor);
+    }
+
+    @Override
+    public void elementsSwaped(int swaps) {
+        this.swaps = swaps;
+    }
+
+    @Override
+    public void elementsCompared(int comparisons) {
+        this.comparisons = comparisons;
+        
     }
 
     /**
@@ -101,6 +112,8 @@ public abstract class SortApplet
         }
 
         drawCursor(g, masterCursor, slaveCursor);
+        drawSwaps(g, swaps);
+        drawComparisons(g, comparisons);
     }
 
     @Override
@@ -136,17 +149,17 @@ public abstract class SortApplet
 
     protected void fill() {
         switch (fill) {
-            case RandomArray.FILL_RANDOM:
-                this.arr = RandomArray.random(height / 2);
+            case ArrayUtil.FILL_RANDOM:
+                this.arr = ArrayUtil.random(height / 2);
                 break;
-            case RandomArray.FILL_REVERSE:
-                this.arr = RandomArray.reversed(height / 2);
+            case ArrayUtil.FILL_REVERSE:
+                this.arr = ArrayUtil.reversed(height / 2);
                 break;
-            case RandomArray.FILL_NEARLY_SORTED:
-                this.arr = RandomArray.nearlySorted(height / 2, 3);
+            case ArrayUtil.FILL_NEARLY_SORTED:
+                this.arr = ArrayUtil.nearlySorted(height / 2, 3);
                 break;
-            case RandomArray.FILL_REPEATED:
-                this.arr = RandomArray.repeated(height / 2, 15);
+            case ArrayUtil.FILL_REPEATED:
+                this.arr = ArrayUtil.repeated(height / 2, 15);
                 break;
         }
 
@@ -166,14 +179,20 @@ public abstract class SortApplet
     protected abstract void drawIndex(Graphics g, int i);
 
     protected abstract void drawCursor(Graphics g, int master, int slave);
+
+    protected abstract void drawSwaps(Graphics g, int swaps);
+
+    protected abstract void drawComparisons(Graphics g, int comparisons);
     protected int[] arr;
-    private Thread executer;
     protected int fill;
     protected int height;
     protected double ratio;
+    protected int width;
+    private Thread executer;
     private Sort sorter;
     private String strategy;
-    protected int width;
     private int masterCursor;
     private int slaveCursor;
+    private int swaps;
+    private int comparisons;
 }

@@ -15,7 +15,7 @@
  */
 package edu.mum.cs.applet;
 
-import edu.mum.cs.util.RandomArray;
+import edu.mum.cs.util.ArrayUtil;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -41,17 +41,17 @@ public class HColorApplet
     @Override
     protected void fill() {
         switch (fill) {
-            case RandomArray.FILL_RANDOM:
-                this.arr = RandomArray.random(width / 2);
+            case ArrayUtil.FILL_RANDOM:
+                this.arr = ArrayUtil.random(width / 2);
                 break;
-            case RandomArray.FILL_REVERSE:
-                this.arr = RandomArray.reversed(width / 2);
+            case ArrayUtil.FILL_REVERSE:
+                this.arr = ArrayUtil.reversed(width / 2);
                 break;
-            case RandomArray.FILL_NEARLY_SORTED:
-                this.arr = RandomArray.nearlySorted(width / 2, 3);
+            case ArrayUtil.FILL_NEARLY_SORTED:
+                this.arr = ArrayUtil.nearlySorted(width / 2, 3);
                 break;
-            case RandomArray.FILL_REPEATED:
-                this.arr = RandomArray.repeated(width / 2, 15);
+            case ArrayUtil.FILL_REPEATED:
+                this.arr = ArrayUtil.repeated(width / 2, 15);
                 break;
         }
     }
@@ -69,5 +69,13 @@ public class HColorApplet
             int x = slave * 2;
             g.fillRect(x, 0, 2, height);
         }
+    }
+
+    @Override
+    protected void drawSwaps(Graphics g, int swaps) {
+    }
+
+    @Override
+    protected void drawComparisons(Graphics g, int comparisons) {
     }
 }

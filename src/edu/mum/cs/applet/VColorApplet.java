@@ -52,4 +52,12 @@ public class VColorApplet
             g.fillRect(0, y, width, 2);
         }
     }
+
+    @Override
+    protected void drawSwaps(Graphics g, int swaps) {
+    }
+
+    @Override
+    protected void drawComparisons(Graphics g, int comparisons) {
+    }
 }

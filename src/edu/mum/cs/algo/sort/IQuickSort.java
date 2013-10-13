@@ -15,7 +15,7 @@
  */
 package edu.mum.cs.algo.sort;
 
-import edu.mum.cs.util.RandomArray;
+import edu.mum.cs.util.ArrayUtil;
 import java.util.Arrays;
 
 /**
@@ -28,7 +28,7 @@ public class IQuickSort
         extends Sort {
 
     public static void main(String[] args) {
-        int[] a = RandomArray.random(100);
+        int[] a = ArrayUtil.random(100);
         IQuickSort iq = new IQuickSort();
         iq.reset(a);
         iq.sort();

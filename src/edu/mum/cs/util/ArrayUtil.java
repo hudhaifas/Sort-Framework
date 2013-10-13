@@ -15,8 +15,6 @@
  */
 package edu.mum.cs.util;
 
-import java.util.Arrays;
-
 /**
  * This is a utility class helps in generating arrays in certain forms, to be used in comparing sorting algorithms:
  * <ul>
@@ -30,7 +28,7 @@ import java.util.Arrays;
  * @version 1.0, Oct 3, 2013 - 10:49:01 PM
  * @since sort-framework v1.0
  */
-public class RandomArray {
+public class ArrayUtil {
 
     /**
      * Create an array of size n and filled with random numbers from 0...n - 1.
@@ -49,6 +47,24 @@ public class RandomArray {
         }
 
         random(arr, 0, arr.length);
+        return arr;
+    }
+
+    /**
+     * Create an array of size n and filled with sorted numbers from 0...n - 1.
+     * <p/>
+     * @param n Size of the array
+     * <p/>
+     * @return An array of size n.
+     * <p/>
+     * @since sort-framework v1.0
+     */
+    public static int[] sorted(int n) {
+        int[] arr = new int[n];
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = i;
+        }
         return arr;
     }
 
@@ -129,7 +145,6 @@ public class RandomArray {
      * @since sort-framework v1.0
      */
     public static int[] cloneArray(int[] src) {
-        Arrays.sort(src);
         int[] ret = new int[src.length];
         System.arraycopy(src, 0, ret, 0, src.length);
         return ret;

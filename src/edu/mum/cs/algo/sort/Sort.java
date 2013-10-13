@@ -15,6 +15,8 @@
  */
 package edu.mum.cs.algo.sort;
 
+import edu.mum.cs.algo.Algorithm;
+
 /**
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
@@ -22,7 +24,8 @@ package edu.mum.cs.algo.sort;
  * @version 1.1, Oct 7, 2013
  * @since sort-framework v1.0
  */
-public abstract class Sort {
+public abstract class Sort
+        extends Algorithm {
 
     /**
      *
@@ -91,6 +94,8 @@ public abstract class Sort {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
+
+        fireSwapEvent();
     }
 
     protected final void notifyCursor(int i, int j) {
@@ -129,6 +134,7 @@ public abstract class Sort {
      */
     protected final boolean isLess(int a, int b) {
         comparisons++;
+        fireCompareEvent();
         return a < b;
     }
 
@@ -142,6 +148,7 @@ public abstract class Sort {
      */
     protected final boolean isGreater(int a, int b) {
         comparisons++;
+        fireCompareEvent();
         return a > b;
     }
 
@@ -155,6 +162,7 @@ public abstract class Sort {
      */
     protected final boolean isEqual(int a, int b) {
         comparisons++;
+        fireCompareEvent();
         return a == b;
     }
 
@@ -168,6 +176,7 @@ public abstract class Sort {
      */
     protected final boolean isNotEqual(int a, int b) {
         comparisons++;
+        fireCompareEvent();
         return a != b;
     }
 
@@ -181,6 +190,7 @@ public abstract class Sort {
      */
     protected final boolean isLessEqual(int a, int b) {
         comparisons++;
+        fireCompareEvent();
         return a <= b;
     }
 
@@ -194,7 +204,20 @@ public abstract class Sort {
      */
     protected final boolean isGreaterEqual(int a, int b) {
         comparisons++;
+        fireCompareEvent();
         return a >= b;
+    }
+
+    private void fireCompareEvent() {
+        if (listener != null) {
+            listener.elementsCompared(comparisons);
+        }
+    }
+
+    private void fireSwapEvent() {
+        if (listener != null) {
+            listener.elementsSwaped(swaps);
+        }
     }
 
     /**
@@ -226,6 +249,16 @@ public abstract class Sort {
          *
          */
         public void sortFinished();
+
+        /**
+         *
+         */
+        public void elementsSwaped(int swaps);
+
+        /**
+         *
+         */
+        public void elementsCompared(int comparisons);
     }
     /**
      *

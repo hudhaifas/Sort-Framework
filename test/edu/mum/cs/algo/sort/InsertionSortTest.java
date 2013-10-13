@@ -15,6 +15,8 @@
  */
 package edu.mum.cs.algo.sort;
 
+import edu.mum.cs.util.ArrayUtil;
+import java.util.Arrays;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,6 +36,9 @@ public class InsertionSortTest {
     @Before
     public void setUp() {
         instance = new InsertionSort();
+        a = ArrayUtil.random(100);
+        b = ArrayUtil.cloneArray(a);
+        Arrays.sort(b);
     }
 
     @After
@@ -54,6 +59,7 @@ public class InsertionSortTest {
         System.out.println("Array size: " + a.length);
         System.out.println("# Comparisons: " + instance.getComparisons());
         System.out.println("# Swaps: " + instance.getSwaps());
+        System.out.println("# Compexity: " + instance.getTimeCompleixty());
 
         assertArrayEquals(a, b);
     }

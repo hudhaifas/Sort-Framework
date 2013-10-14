@@ -27,14 +27,6 @@ import java.util.Arrays;
 public class IQuickSort
         extends Sort {
 
-    public static void main(String[] args) {
-        int[] a = ArrayUtil.random(100);
-        IQuickSort iq = new IQuickSort();
-        iq.reset(a);
-        iq.sort();
-        System.out.println(Arrays.toString(a));
-    }
-
     @Override
     public String getName() {
         return "IQuickSort";

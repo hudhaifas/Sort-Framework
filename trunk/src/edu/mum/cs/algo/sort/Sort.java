@@ -27,6 +27,13 @@ import edu.mum.cs.algo.Algorithm;
 public abstract class Sort
         extends Algorithm {
 
+    public Sort() {
+    }
+
+    protected Sort(int[] arr) {
+        this.arr = arr;
+    }
+
     /**
      *
      * @param listener

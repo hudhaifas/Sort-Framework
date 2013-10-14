@@ -70,11 +70,4 @@ public class FourSort
             arr[2] = fuzzy1;
         }
     }
-
-    protected void swap(int[] a, int i, int j) {
-        swaps++;
-        int temp = a[i];
-        a[i] = a[j];
-        a[j] = temp;
-    }
 }

@@ -20,22 +20,21 @@ import java.util.Arrays;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
- * @version 1.0, Oct 11, 2013 - 8:19:58 AM
+ * @version 1.0, Oct 13, 2013 - 10:25:32 PM
  */
-public class InsertionSortTest {
+public class MergeSortTest {
 
-    public InsertionSortTest() {
+    public MergeSortTest() {
     }
 
     @Before
     public void setUp() {
-        instance = new InsertionSort();
+        instance = new MergeSort();
         a = ArrayUtil.random(100);
         b = ArrayUtil.cloneArray(a);
         Arrays.sort(b);
@@ -63,24 +62,7 @@ public class InsertionSortTest {
 
         assertArrayEquals(a, b);
     }
-
-    /**
-     * Test of sort method, of class InsertionSort.
-     */
-    @Test
-    public void testSort2() {
-        System.out.println("Recursive sort");
-
-        instance.reset(a);
-        instance.sort(a.length);
-
-        System.out.println("Array size: " + a.length);
-        System.out.println("# Comparisons: " + instance.getComparisons());
-        System.out.println("# Swaps: " + instance.getSwaps());
-
-        assertArrayEquals(a, b);
-    }
-    private InsertionSort instance;
+    private MergeSort instance;
     private int[] a;
     private int[] b;
 }

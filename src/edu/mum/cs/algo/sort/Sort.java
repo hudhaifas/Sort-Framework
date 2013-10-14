@@ -98,6 +98,15 @@ public abstract class Sort
         fireSwapEvent();
     }
 
+    protected final void swap(int[] a, int i, int j) {
+        swaps++;
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+
+        fireSwapEvent();
+    }
+
     protected final void notifyCursor(int i, int j) {
         if (listener != null) {
             listener.cursorsChanged(i, j);

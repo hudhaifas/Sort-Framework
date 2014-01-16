@@ -16,6 +16,8 @@
 package edu.mum.cs.algo.sort;
 
 /**
+ * This class implements the traditional Quick sort algorithm by dividing the array into two parts based on
+ * calculating single pivot in each loop iteration. This algorithm offers O(n log(n)) complexity.
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Sep 24, 2013 - 5:51:57 PM
@@ -24,38 +26,47 @@ package edu.mum.cs.algo.sort;
 public class QuickSort
         extends Sort {
 
-    public QuickSort() {
-    }
-
     @Override
     public void sort() {
         quickSort(0, arr.length - 1);
         finish();
     }
 
+    /**
+     * Sort the array or sub array by quick sort.
+     *
+     * @param left the start index
+     * @param right the end index
+     */
     private void quickSort(int left, int right) {
         int i = left;
         int j = right;
+        int length = right - left;
+
+        if (length <= 1) {
+            return;
+        }
+
         notifyCursor(i, j);
-        
-        // Get the pivot element from the middle of the list
-        int pivot = arr[left + (right - left) / 2];
-        
-        // Divide into two lists
+
+        // Calculate the povit in the middle of the array
+        int pivot = arr[left + length / 2];
+
+        // Numbers which are grater then the pivot moved to the right and numbers which are less than 
+        // pivot moved to the right
         while (i <= j) {
-            
             // If the current value from the left list is smaller then the pivot
             // element then get the next element from the left list
             while (isLess(arr[i], pivot)) {
                 i++;
             }
-            
+
             // If the current value from the right list is larger then the pivot
             // element then get the next element from the right list
             while (isGreater(arr[j], pivot)) {
                 j--;
             }
-            
+
             // If we have found a values in the left list which is larger then
             // the pivot element and if we have found a value in the right list
             // which is smaller then the pivot element then we swap the
@@ -68,7 +79,7 @@ public class QuickSort
                 notifyPause();
             }
         }
-        
+
         // Recursion
         if (left < j) {
             quickSort(left, j);

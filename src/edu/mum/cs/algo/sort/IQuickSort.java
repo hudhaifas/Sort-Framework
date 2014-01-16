@@ -15,10 +15,12 @@
  */
 package edu.mum.cs.algo.sort;
 
-import edu.mum.cs.util.ArrayUtil;
 import java.util.Arrays;
 
 /**
+ * This class implements the IQuick sort algorithm which is a combination of quick sort algorithm and
+ * insertion sort algorithm based on the array size. This algorithm offers O(n log(n)) complexity but it is
+ * typically faster than traditional Quicksort implementations in the big data sets.
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Oct 8, 2013 - 9:12:36 AM
@@ -38,24 +40,35 @@ public class IQuickSort
         finish();
     }
 
+    /**
+     * Sort the array or sub array by quick sort.
+     *
+     * @param left the start index
+     * @param right the end index
+     */
     private void quickSort(int left, int right) {
         int i = left;
         int j = right;
         notifyCursor(i, j);
-        // Get the pivot element from the middle of the list
+
+        // Calculate the povit in the middle of the array
         int pivot = arr[left + (right - left) / 2];
-        // Divide into two lists
+
+        // Numbers which are grater then the pivot moved to the right and numbers which are less than 
+        // pivot moved to the right
         while (i <= j) {
             // If the current value from the left list is smaller then the pivot
             // element then get the next element from the left list
             while (arr[i] < pivot) {
                 i++;
             }
+
             // If the current value from the right list is larger then the pivot
             // element then get the next element from the right list
             while (arr[j] > pivot) {
                 j--;
             }
+
             // If we have found a values in the left list which is larger then
             // the pivot element and if we have found a value in the right list
             // which is smaller then the pivot element then we swap the
@@ -68,6 +81,7 @@ public class IQuickSort
                 notifyPause();
             }
         }
+
         // Recursion
         if (left < j) {
             chooseAlgorithm(left, j);
@@ -77,6 +91,12 @@ public class IQuickSort
         }
     }
 
+    /**
+     * Sort the array or sub array by insertion sort.
+     *
+     * @param left the start index
+     * @param right the end index
+     */
     private void insertionSort(int left, int right) {
         int temp;
 
@@ -92,11 +112,24 @@ public class IQuickSort
         }
     }
 
+    /**
+     * Choose the convenient algorithm based on the array or sub array length.
+     *
+     * @param left the start index
+     * @param right the end index
+     */
     private void chooseAlgorithm(int left, int right) {
-        if ((right - left) <= 45) {
+        // Use the Insertion sort
+        if ((right - left) <= INSERTION_THRESHOLD) {
             insertionSort(left, right);
         } else {
             quickSort(left, right);
         }
     }
+
+    /**
+     * If the length of an array or sub array is less than the threshold, Insertion sort is used rather than
+     * Quick sort.
+     */
+    private static final int INSERTION_THRESHOLD = 45;
 }

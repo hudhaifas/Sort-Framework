@@ -15,8 +15,6 @@
  */
 package edu.mum.cs.algo.sort;
 
-import java.util.Arrays;
-
 /**
  * This class implements the traditional Merge sort algorithm by dividing the array into two array in each
  * loop iteration. This algorithm offers O(n log(n)) complexity.

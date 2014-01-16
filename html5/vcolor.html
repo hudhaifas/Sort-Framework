@@ -26,7 +26,13 @@
             var f4 = document.getElementById('sorted');
 
             var names = ['InsertionSort', 'BubbleSort', 'ShuffleSort', 'QuickSort', 'IQuickSort'];
-            var strategies = ['edu.mum.util.sort.InsertionSort', 'edu.mum.util.sort.BubbleSort', 'edu.mum.util.sort.ShuffleSort', 'edu.mum.util.sort.QuickSort', 'edu.mum.util.sort.IQuickSort'];
+            var strategies = [
+                'edu.mum.cs.algo.sort.InsertionSort',
+                'edu.mum.cs.algo.sort.BubbleSort',
+                'edu.mum.cs.algo.sort.ShuffleSort',
+                'edu.mum.cs.algo.sort.QuickSort',
+                'edu.mum.cs.algo.sort.IQuickSort'
+            ];
             var colors = ['#97234f', '#2288ee', '#2200ee', '#22fe88', '#fa9c00'];
 
             f1.onclick = slide.bind(this, 0);
@@ -49,7 +55,7 @@
                 ret += '<tr>';
                 for (var i = 0; i < strategies.length; i++) {
                     ret += '<td>';
-                    ret += '<applet codebase="classes" code="edu/mum/applet/VColorApplet.class" width=50 height=300>';
+                    ret += '<applet codebase="classes" code="edu/mum/cs/applet/VColorApplet.class" width=50 height=300>';
                     ret += '<param name="strategy" value="' + strategies[i] + '" />';
                     ret += '<param name="fill" value="' + fill + '" />';
                     ret += '<param name="color" value="' + colors[i] + '" />';

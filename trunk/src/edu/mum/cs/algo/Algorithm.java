@@ -16,22 +16,39 @@
 package edu.mum.cs.algo;
 
 /**
+ * Algorithm class is the base class of all other algorithm implementation to calculate their complexity.
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Oct 12, 2013 - 5:45:00 PM
  */
 public abstract class Algorithm {
 
+    /**
+     * Adds a unit to the time complexity.
+     */
     public void addUnit() {
         complexity++;
     }
 
+    /**
+     * Adds a units to the time complexity.
+     *
+     * @param units the value of the complexity units.
+     */
     public void addUnits(int units) {
         complexity += units;
     }
 
+    /**
+     * Returns the time complexity of the algorithm.
+     *
+     * @return the time complexity of the algorithm.
+     */
     public int getTimeCompleixty() {
         return complexity;
     }
+    /**
+     * Time complexity.
+     */
     private int complexity;
 }

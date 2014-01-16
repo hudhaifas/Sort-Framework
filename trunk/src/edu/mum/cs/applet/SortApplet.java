@@ -26,7 +26,7 @@ import javax.swing.JApplet;
 
 /**
  * This is the base class for visualization sorting steps in different ways.
- * <p/>
+ *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.1, Oct 8, 2013
  * @since sort-framework v1.0
@@ -36,16 +36,16 @@ public abstract class SortApplet
         implements Runnable, MouseListener, Sort.ArrayChangeListener {
 
     @Override
-    public void cursorsChanged(int i, int j) {
-        masterCursor = i;
-        slaveCursor = j;
+    public void cursorsChanged(int master, int slave) {
+        masterCursor = master;
+        slaveCursor = slave;
         repaint();
         await(40);
     }
 
     @Override
-    public void cursorsChanged(int i) {
-        cursorsChanged(i, slaveCursor);
+    public void cursorsChanged(int master) {
+        cursorsChanged(master, slaveCursor);
     }
 
     @Override
@@ -61,7 +61,7 @@ public abstract class SortApplet
     @Override
     public void elementsCompared(int comparisons) {
         this.comparisons = comparisons;
-        
+
     }
 
     /**
@@ -118,20 +118,20 @@ public abstract class SortApplet
 
     @Override
     public final void run() {
+        // Reinitialzes the array.
         this.sorter.reset(arr);
+
+        // Starts sorting
         this.sorter.sort();
     }
 
     @Override
     public void sortFinished() {
+        // Resets the cursors to the default value.
         masterCursor = -1;
         slaveCursor = -1;
-        repaint();
-    }
 
-    @Override
-    public void update(Graphics g) {
-        paint(g);
+        repaint();
     }
 
     /**
@@ -147,6 +147,17 @@ public abstract class SortApplet
         }
     }
 
+    /**
+     * Fills the array in on of the following orders:
+     * <ul>
+     * <li>Reverse order (non-repeated elements)</li>
+     * <li>Nearly sorted (non-repeated elements)</li>
+     * <li>Randomized (non-repeated elements)</li>
+     * <li>Randomized (repeated elements)</li>
+     * </ul>
+     *
+     * @see ArrayUtil
+     */
     protected void fill() {
         switch (fill) {
             case ArrayUtil.FILL_RANDOM:
@@ -166,23 +177,55 @@ public abstract class SortApplet
         this.ratio = (double) this.width / this.arr.length;
     }
 
+    /**
+     * Starts the sorting process.
+     */
     protected void startSort() {
+        // Check if the sorting thread is already running.
         if (executer != null && executer.isAlive()) {
             return;
         }
+
         fill();
         repaint();
+
         this.executer = new Thread(this);
         this.executer.start();
     }
 
+    /**
+     * Draws a single element.
+     *
+     * @param g Graphics objects
+     * @param i the index of an element to be drawing
+     */
     protected abstract void drawIndex(Graphics g, int i);
 
+    /**
+     * Draws both master and slave cursors.
+     *
+     * @param g Graphics objects
+     * @param master Master loop index
+     * @param slave Slave loop index
+     */
     protected abstract void drawCursor(Graphics g, int master, int slave);
 
+    /**
+     * Draws the swaps statistics.
+     *
+     * @param g Graphics object
+     * @param swaps current number of swaps occurred.
+     */
     protected abstract void drawSwaps(Graphics g, int swaps);
 
+    /**
+     * Draws the comparisons statistics.
+     *
+     * @param g Graphics object
+     * @param comparisons current number of comparisons occurred.
+     */
     protected abstract void drawComparisons(Graphics g, int comparisons);
+
     protected int[] arr;
     protected int fill;
     protected int height;

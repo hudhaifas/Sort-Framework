@@ -15,7 +15,11 @@
  */
 package edu.mum.cs.algo.sort;
 
+import java.util.Arrays;
+
 /**
+ * This class implements the traditional Merge sort algorithm by dividing the array into two array in each
+ * loop iteration. This algorithm offers O(n log(n)) complexity.
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Oct 13, 2013 - 10:09:56 PM
@@ -30,55 +34,76 @@ public class MergeSort
 
     @Override
     public void sort() {
-        divide(arr);
+        helper = new int[arr.length];
+        System.arraycopy(arr, 0, helper, 0, arr.length);
+
+        divide(0, arr.length - 1);
+        finish();
     }
 
     /**
+     * Divides the array into two equaled sub arrays.
      *
-     * @param src
+     * @param left the first index of the array or sub array
+     * @param right the last index of the array or sub array
      */
-    private void divide(int[] src) {
-        if (src.length == 1) {
+    private void divide(int left, int right) {
+        int length = right - left;
+
+        if (length < 1) {
             return;
         }
 
-        int middle = src.length / 2;
+        notifyCursor(left, right);
 
-        int[] left = new int[middle];
-        System.arraycopy(src, 0, left, 0, left.length);
+        // Calculates the middle of the array.
+        int middle = left + length / 2;
 
-        int[] right = new int[src.length - middle];
-        System.arraycopy(src, middle, right, 0, right.length);
+        divide(left, middle);
+        divide(middle + 1, right);
+        merge(left, middle, right);
 
-        divide(left);
-        divide(right);
-
-        merge(src, left, right);
     }
 
     /**
+     * Merges two unsorted array parts into one sorted array part.
      *
-     * @param target
-     * @param left
-     * @param right
+     * @param left the first index of the array or sub array
+     * @param middle the middle index of the array or sub array
+     * @param right the last index of the array or sub array
      */
-    private void merge(int[] target, int[] left, int[] right) {
-        int targetCount = 0, leftCount = 0, rightCount = 0;
+    private void merge(int left, int middle, int right) {
+        int targetCount = left, leftCount = left, rightCount = middle + 1;
 
-        while (leftCount < left.length && rightCount < right.length) {
-            if (isLess(left[leftCount], right[rightCount])) {
-                target[targetCount++] = left[leftCount++];
+        notifyCursor(left, right);
+
+        // Adding the smaller value from each array in each loop.
+        while (leftCount <= middle && rightCount <= right) {
+            if (isLess(helper[leftCount], helper[rightCount])) {
+                arr[targetCount++] = helper[leftCount++];
+                notifyCursor(targetCount, leftCount);
             } else {
-                target[targetCount++] = right[rightCount++];
+                arr[targetCount++] = helper[rightCount++];
+                notifyCursor(targetCount, rightCount);
             }
         }
 
-        while (leftCount < left.length) {
-            target[targetCount++] = left[leftCount++];
+        // Adding the rest values of the left array
+        while (leftCount <= middle) {
+            arr[targetCount++] = helper[leftCount++];
+            notifyCursor(targetCount, leftCount);
         }
 
-        while (rightCount < right.length) {
-            target[targetCount++] = right[rightCount++];
+        // Adding the rest values of the right array
+        while (rightCount <= right) {
+            arr[targetCount++] = helper[rightCount++];
+            notifyCursor(targetCount, rightCount);
+        }
+
+        for (int i = left; i <= right; i++) {
+            helper[i] = arr[i];
         }
     }
+
+    private int[] helper;
 }

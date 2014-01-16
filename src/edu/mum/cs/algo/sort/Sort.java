@@ -46,9 +46,9 @@ public abstract class Sort
     }
 
     /**
-     * The name of sort algorithm
+     * Returns the name of the sort algorithm.
      *
-     * @return The name of sort algorithm
+     * @return the name of the sort algorithm
      */
     public abstract String getName();
 

@@ -16,14 +16,15 @@
 package edu.mum.cs.util;
 
 /**
- * This is a utility class helps in generating arrays in certain forms, to be used in comparing sorting algorithms:
+ * This is a utility class helps in generating arrays in certain forms, to be used in comparing sorting
+ * algorithms:
  * <ul>
  * <li>Reverse order (non-repeated elements)</li>
  * <li>Nearly sorted (non-repeated elements)</li>
  * <li>Randomized (non-repeated elements)</li>
  * <li>Randomized (repeated elements)</li>
  * </ul>
- * <p/>
+ *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Oct 3, 2013 - 10:49:01 PM
  * @since sort-framework v1.0
@@ -31,7 +32,7 @@ package edu.mum.cs.util;
 public class ArrayUtil {
 
     /**
-     * Create an array of size n and filled with random numbers from 0...n - 1.
+     * Creates an array of size n and filled with random numbers from 0...n - 1.
      *
      * @param n Size of the array
      *
@@ -51,7 +52,7 @@ public class ArrayUtil {
     }
 
     /**
-     * Create an array of size n and filled with sorted numbers from 0...n - 1.
+     * Creates an array of size n and filled with sorted numbers from 0...n - 1.
      * <p/>
      * @param n Size of the array
      * <p/>
@@ -69,7 +70,7 @@ public class ArrayUtil {
     }
 
     /**
-     * Create an array of size n and filled with nearly sorted random numbers from 0..(n - 1).
+     * Creates an array of size n and filled with nearly sorted random numbers from 0..(n - 1).
      *
      * @param n Size of the array
      * @param g Group size
@@ -92,7 +93,7 @@ public class ArrayUtil {
     }
 
     /**
-     * Create an array of size n and filled with nearly sorted random numbers from 0..(n - 1).
+     * Creates an array of size n and filled with nearly sorted random numbers from 0..(n - 1).
      *
      * @param n Size of the array
      * @param g Group size
@@ -117,7 +118,7 @@ public class ArrayUtil {
     }
 
     /**
-     * Create an array of size n and filled reversed numbers from (n - 1)..0
+     * Creates an array of size n and filled reversed numbers from (n - 1)..0
      *
      * @param n Size of the array
      *
@@ -136,12 +137,10 @@ public class ArrayUtil {
     }
 
     /**
-     * Create an array of size n and filled with random numbers from 0...n - 1.
+     * Creates an array of size n and filled with random numbers from 0...n - 1.
      *
-     * @param n Size of the array
-     *
+     * @param src the array to be cloned
      * @return An array of size n.
-     * <p/>
      * @since sort-framework v1.0
      */
     public static int[] cloneArray(int[] src) {
@@ -151,11 +150,11 @@ public class ArrayUtil {
     }
 
     /**
-     * Mixing range of existing array's elements randomly
+     * Mixes range of existing array's elements randomly
      *
-     * @param arr   Array to be mixed
+     * @param arr Array to be mixed
      * @param start First index in the range
-     * @param end   Last index in the range
+     * @param end Last index in the range
      * <p/>
      * @since sort-framework v1.0
      */
@@ -167,11 +166,11 @@ public class ArrayUtil {
     }
 
     /**
-     * Reverse ordering of range of existing array's elements randomly
+     * Reverses ordering of range of existing array's elements randomly
      *
-     * @param arr   Array to be reversed
+     * @param arr Array to be reversed
      * @param start First index in the range
-     * @param end   Last index in the range
+     * @param end Last index in the range
      * <p/>
      * @since sort-framework v1.0
      */
@@ -184,11 +183,11 @@ public class ArrayUtil {
     }
 
     /**
-     * Exchange to elements positions in an array.
+     * Exchanges to elements positions in an array.
      *
      * @param arr Array that has elements to be exchange
-     * @param i   Index of element which will be swapped.
-     * @param j   Index of element which will be swapped.
+     * @param i Index of element which will be swapped.
+     * @param j Index of element which will be swapped.
      * <p/>
      * @since sort-framework v1.0
      */
@@ -197,8 +196,21 @@ public class ArrayUtil {
         arr[i] = arr[j];
         arr[j] = t;
     }
-    public static final int FILL_NEARLY_SORTED = 3;
+
+    /**
+     * Randomized (non-repeated elements)
+     */
     public static final int FILL_RANDOM = 0;
-    public static final int FILL_REPEATED = 2;
+    /**
+     * Reverse order (non-repeated elements)
+     */
     public static final int FILL_REVERSE = 1;
+    /**
+     * Randomized (repeated elements)
+     */
+    public static final int FILL_REPEATED = 2;
+    /**
+     * Nearly sorted (non-repeated elements)
+     */
+    public static final int FILL_NEARLY_SORTED = 3;
 }

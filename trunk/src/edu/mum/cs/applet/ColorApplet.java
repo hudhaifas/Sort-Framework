@@ -20,7 +20,7 @@ public abstract class ColorApplet
     public void init() {
         try {
             this.baseColor = Color.decode(getParameter("color"));
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             this.baseColor = Color.YELLOW;
         }
         super.init();

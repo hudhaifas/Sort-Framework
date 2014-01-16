@@ -20,6 +20,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
+ * This is an implementation of simulating the sorting algorithm in a horizontal bar.
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Oct 5, 2013 - 9:29:54 PM
@@ -44,15 +45,15 @@ public class HColorApplet
             case ArrayUtil.FILL_RANDOM:
                 this.arr = ArrayUtil.random(width / 2);
                 break;
-                
+
             case ArrayUtil.FILL_REVERSE:
                 this.arr = ArrayUtil.reversed(width / 2);
                 break;
-                
+
             case ArrayUtil.FILL_NEARLY_SORTED:
                 this.arr = ArrayUtil.nearlySorted(width / 2, 3);
                 break;
-                
+
             case ArrayUtil.FILL_REPEATED:
                 this.arr = ArrayUtil.repeated(width / 2, 15);
                 break;

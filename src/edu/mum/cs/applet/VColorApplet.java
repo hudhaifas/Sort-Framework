@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
+ * This is an implementation of simulating the sorting algorithm in a vertical bar.
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Oct 5, 2013 - 9:29:54 PM

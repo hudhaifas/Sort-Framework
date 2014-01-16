@@ -16,6 +16,9 @@
 package edu.mum.cs.algo.sort;
 
 /**
+ * This class implements the IMerge sort algorithm which is a combination of merge sort algorithm and
+ * insertion sort algorithm based on the array size. This algorithm offers O(n log(n)) complexity but it is
+ * typically faster than traditional Merge sort implementations in the big data sets.
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Oct 13, 2013 - 10:34:20 PM
@@ -30,78 +33,123 @@ public class IMergeSort
 
     @Override
     public void sort() {
-        chooseAlgorithm(arr);
+        helper = new int[arr.length];
+        System.arraycopy(arr, 0, helper, 0, arr.length);
+
+        chooseAlgorithm(0, arr.length - 1);
+
+        finish();
     }
 
     /**
+     * Divides the array into two equaled sub arrays.
      *
-     * @param src
+     * @param left the first index of the array or sub array
+     * @param right the last index of the array or sub array
      */
-    private void divide(int[] src) {
-        if (src.length == 1) {
+    private void divide(int left, int right) {
+        int length = right - left;
+
+        if (length < 1) {
             return;
         }
 
-        int middle = src.length / 2;
+        notifyCursor(left, right);
 
-        int[] left = new int[middle];
-        System.arraycopy(src, 0, left, 0, left.length);
+        // Calculates the middle of the array.
+        int middle = left + length / 2;
 
-        int[] right = new int[src.length - middle];
-        System.arraycopy(src, middle, right, 0, right.length);
+        chooseAlgorithm(left, middle);
+        chooseAlgorithm(middle + 1, right);
 
-        chooseAlgorithm(left);
-        chooseAlgorithm(right);
-
-        merge(src, left, right);
+        merge(left, middle, right);
     }
 
     /**
+     * Merges two unsorted array parts into one sorted array part.
      *
-     * @param target
-     * @param left
-     * @param right
+     * @param left the first index of the array or sub array
+     * @param middle the middle index of the array or sub array
+     * @param right the last index of the array or sub array
      */
-    private void merge(int[] target, int[] left, int[] right) {
-        int targetCount = 0, leftCount = 0, rightCount = 0;
+    private void merge(int left, int middle, int right) {
+        int targetCount = left, leftCount = left, rightCount = middle + 1;
 
-        while (leftCount < left.length && rightCount < right.length) {
-            if (isLess(left[leftCount], right[rightCount])) {
-                target[targetCount++] = left[leftCount++];
+        notifyCursor(left, right);
+
+        // Adding the smaller value from each array in each loop.
+        while (leftCount <= middle && rightCount <= right) {
+            if (isLess(helper[leftCount], helper[rightCount])) {
+                arr[targetCount++] = helper[leftCount++];
+                notifyCursor(targetCount, leftCount);
             } else {
-                target[targetCount++] = right[rightCount++];
+                arr[targetCount++] = helper[rightCount++];
+                notifyCursor(targetCount, rightCount);
             }
         }
 
-        while (leftCount < left.length) {
-            target[targetCount++] = left[leftCount++];
+        // Adding the rest values of the left array
+        while (leftCount <= middle) {
+            arr[targetCount++] = helper[leftCount++];
+            notifyCursor(targetCount, leftCount);
         }
 
-        while (rightCount < right.length) {
-            target[targetCount++] = right[rightCount++];
+        // Adding the rest values of the right array
+        while (rightCount <= right) {
+            arr[targetCount++] = helper[rightCount++];
+            notifyCursor(targetCount, rightCount);
         }
+
+        updateHelper(left, right);
     }
 
-    private void chooseAlgorithm(int[] src) {
-        if (src.length <= 45) {
-            insertionSort(src);
-        } else {
-            divide(src);
-        }
-    }
-
-    private void insertionSort(int[] src) {
+    /**
+     * Sort the array or sub array by insertion sort.
+     *
+     * @param left the start index
+     * @param right the end index
+     */
+    private void insertionSort(int left, int right) {
         int temp;
 
-        for (int i = 1; i < src.length; i++) {
-            temp = src[i];
+        for (int i = left + 1; i <= right; i++) {
+            temp = arr[i];
             int j;
-            for (j = i; j > 0 && isLess(temp, src[j - 1]); j--) {
-                swap(src, j, j - 1);
+            for (j = i; j > left && isLess(temp, arr[j - 1]); j--) {
+                swap(j, j - 1);
                 notifyCursor(i, j);
             }
-            src[j] = temp;
+            arr[j] = temp;
             notifyCursor(i);
         }
+        updateHelper(left, right);
     }
+
+    /**
+     * Choose the convenient algorithm based on the array or sub array length.
+     *
+     * @param left the start index
+     * @param right the end index
+     */
+    private void chooseAlgorithm(int left, int right) {
+        // Use the Insertion sort
+        if ((right - left) <= INSERTION_THRESHOLD) {
+            insertionSort(left, right);
+        } else {
+            divide(left, right);
+        }
+    }
+
+    private void updateHelper(int left, int right) {
+        for (int i = left; i <= right; i++) {
+            helper[i] = arr[i];
+        }
+    }
+
+    /**
+     * If the length of an array or sub array is less than the threshold, Insertion sort is used rather than
+     * Quick sort.
+     */
+    private static final int INSERTION_THRESHOLD = 45;
+    private int[] helper;
 }

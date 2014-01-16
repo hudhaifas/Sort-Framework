@@ -16,6 +16,8 @@
 package edu.mum.cs.algo.sort;
 
 /**
+ * This class implements the Shuffle sort algorithm which starts finding the smallest value and moving it to
+ * the start of the array. This algorithm is the opposite of the Bubble sort and offers O(n^2) complexity.
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Sep 24, 2013 - 5:44:14 PM
@@ -30,6 +32,7 @@ public class ShuffleSort
 
     @Override
     public void sort() {
+        // Iterates all elements and swap the smallest element to the start of the array.
         for (int i = 0; i < arr.length; i++) {
             for (int j = arr.length - 1; j > i; j--) {
                 if (isLess(arr[j], arr[j - 1])) {

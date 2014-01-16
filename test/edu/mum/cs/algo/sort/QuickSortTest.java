@@ -58,6 +58,6 @@ public class QuickSortTest {
         assertArrayEquals(a, b);
     }
     private QuickSort instance;
-    private int[] a = {2, 1, 5, 0, 5, 4};
-    private int[] b = {0, 1, 2, 4, 5, 5};
+    private final int[] a = {2, 1, 5, 0, 5, 4};
+    private final int[] b = {0, 1, 2, 4, 5, 5};
 }

@@ -44,12 +44,15 @@ public class HColorApplet
             case ArrayUtil.FILL_RANDOM:
                 this.arr = ArrayUtil.random(width / 2);
                 break;
+                
             case ArrayUtil.FILL_REVERSE:
                 this.arr = ArrayUtil.reversed(width / 2);
                 break;
+                
             case ArrayUtil.FILL_NEARLY_SORTED:
                 this.arr = ArrayUtil.nearlySorted(width / 2, 3);
                 break;
+                
             case ArrayUtil.FILL_REPEATED:
                 this.arr = ArrayUtil.repeated(width / 2, 15);
                 break;

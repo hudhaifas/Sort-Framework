@@ -26,6 +26,10 @@ package edu.mum.cs.algo.sort;
 public class IMergeSort
         extends Sort {
 
+    public IMergeSort() {
+        waitFor = 10l;
+    }
+
     @Override
     public String getName() {
         return "IMergeSort";
@@ -148,7 +152,7 @@ public class IMergeSort
 
     /**
      * If the length of an array or sub array is less than the threshold, Insertion sort is used rather than
-     * Quick sort.
+     * Merge sort.
      */
     private static final int INSERTION_THRESHOLD = 45;
     private int[] helper;

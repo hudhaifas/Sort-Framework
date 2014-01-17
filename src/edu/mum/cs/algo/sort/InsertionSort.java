@@ -26,6 +26,10 @@ package edu.mum.cs.algo.sort;
 public class InsertionSort
         extends Sort {
 
+    public InsertionSort() {
+        waitFor = 10l;
+    }
+
     @Override
     public String getName() {
         return "InsertionSort";

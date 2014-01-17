@@ -24,7 +24,7 @@ public class IMergeSortTest {
     @Before
     public void setUp() {
         instance = new IMergeSort();
-        a = ArrayUtil.random(100);
+        a = ArrayUtil.random(1_000_000);
         b = ArrayUtil.cloneArray(a);
         Arrays.sort(b);
     }

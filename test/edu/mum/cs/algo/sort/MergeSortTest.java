@@ -18,9 +18,9 @@ package edu.mum.cs.algo.sort;
 import edu.mum.cs.util.ArrayUtil;
 import java.util.Arrays;
 import org.junit.After;
+import static org.junit.Assert.assertArrayEquals;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -35,7 +35,7 @@ public class MergeSortTest {
     @Before
     public void setUp() {
         instance = new MergeSort();
-        a = ArrayUtil.random(100);
+        a = ArrayUtil.random(100_000_000);
         b = ArrayUtil.cloneArray(a);
         Arrays.sort(b);
     }
@@ -62,6 +62,7 @@ public class MergeSortTest {
 
         assertArrayEquals(a, b);
     }
+
     private MergeSort instance;
     private int[] a;
     private int[] b;

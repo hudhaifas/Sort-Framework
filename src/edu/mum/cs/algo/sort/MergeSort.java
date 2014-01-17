@@ -32,6 +32,10 @@ public class MergeSort
 
     @Override
     public void sort() {
+        if (arr.length == 1) {
+            return;
+        }
+
         helper = new int[arr.length];
         System.arraycopy(arr, 0, helper, 0, arr.length);
 

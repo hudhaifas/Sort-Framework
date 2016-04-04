@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.mum.cs.algo.sort;
+package com.wajatto.code.sortframework.algo.sort;
 
 import org.junit.After;
 import org.junit.Before;
@@ -26,14 +26,14 @@ import static org.junit.Assert.assertArrayEquals;
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Oct 11, 2013 - 8:45:27 AM
  */
-public class ShuffleSortTest {
+public class BubbleSortTest {
 
-    public ShuffleSortTest() {
+    public BubbleSortTest() {
     }
 
     @Before
     public void setUp() {
-        instance = new ShuffleSort();
+        instance = new BubbleSort();
     }
 
     @After
@@ -57,7 +57,7 @@ public class ShuffleSortTest {
 
         assertArrayEquals(a, b);
     }
-    private ShuffleSort instance;
+    private BubbleSort instance;
     private int[] a = {2, 1, 5, 0, 5, 4};
     private int[] b = {0, 1, 2, 4, 5, 5};
 }

@@ -13,35 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.mum.cs.algo.sort;
+package com.wajatto.code.sortframework.algo.sort;
 
+import com.wajatto.code.sortframework.util.ArrayUtil;
+import java.util.Arrays;
 import org.junit.After;
+import static org.junit.Assert.assertArrayEquals;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertArrayEquals;
 
 /**
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
- * @version 1.0, Oct 11, 2013 - 8:54:43 AM
+ * @version 1.0, Oct 13, 2013 - 10:25:32 PM
  */
-public class Sort4Test {
+public class MergeSortTest {
 
-    public Sort4Test() {
+    public MergeSortTest() {
     }
 
     @Before
     public void setUp() {
-        instance = new FourSort();
+        instance = new MergeSort();
+        a = ArrayUtil.random(100_000_000);
+        b = ArrayUtil.cloneArray(a);
+        Arrays.sort(b);
     }
 
     @After
     public void tearDown() {
+        instance = null;
     }
 
     /**
-     * Test of sort method, of class FourSort.
+     * Test of sort method, of class InsertionSort.
      */
     @Test
     public void testSort() {
@@ -53,10 +58,12 @@ public class Sort4Test {
         System.out.println("Array size: " + a.length);
         System.out.println("# Comparisons: " + instance.getComparisons());
         System.out.println("# Swaps: " + instance.getSwaps());
+        System.out.println("# Compexity: " + instance.getTimeCompleixty());
 
         assertArrayEquals(a, b);
     }
-    private FourSort instance;
-    private int[] a = {2, 1, 5, 0};
-    private int[] b = {0, 1, 2, 5};
+
+    private MergeSort instance;
+    private int[] a;
+    private int[] b;
 }

@@ -13,27 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.mum.cs.algo.sort;
+package com.wajatto.code.sortframework.parallel;
 
+import com.wajatto.code.sortframework.util.ArrayUtil;
+import java.util.Arrays;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import static org.junit.Assert.assertArrayEquals;
 
 /**
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
- * @version 1.0, Oct 11, 2013 - 8:45:27 AM
+ * @version 1.0, Oct 13, 2013 - 12:43:04 PM
  */
-public class BubbleSortTest {
+public class ParallelIMergeSortTest {
 
-    public BubbleSortTest() {
+    public ParallelIMergeSortTest() {
     }
 
     @Before
     public void setUp() {
-        instance = new BubbleSort();
+        instance = new ParallelIMergeSort();
+        a = ArrayUtil.random(100_000_000);
+        b = ArrayUtil.cloneArray(a);
+        Arrays.sort(b);
     }
 
     @After
@@ -42,7 +46,7 @@ public class BubbleSortTest {
     }
 
     /**
-     * Test of sort method, of class BubbleSort.
+     * Test of sort method, of class ParallelIMergeSort.
      */
     @Test
     public void testSort() {
@@ -57,7 +61,8 @@ public class BubbleSortTest {
 
         assertArrayEquals(a, b);
     }
-    private BubbleSort instance;
+    private ParallelIMergeSort instance;
     private int[] a = {2, 1, 5, 0, 5, 4};
     private int[] b = {0, 1, 2, 4, 5, 5};
+
 }

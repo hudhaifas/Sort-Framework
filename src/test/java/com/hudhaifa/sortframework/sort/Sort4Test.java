@@ -15,7 +15,6 @@
  */
 package com.hudhaifa.sortframework.sort;
 
-import com.hudhaifa.sortframework.sort.FourSort;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,6 +57,6 @@ public class Sort4Test {
         assertArrayEquals(a, b);
     }
     private FourSort instance;
-    private int[] a = {2, 1, 5, 0};
-    private int[] b = {0, 1, 2, 5};
+    private final int[] a = {2, 1, 5, 0};
+    private final int[] b = {0, 1, 2, 5};
 }

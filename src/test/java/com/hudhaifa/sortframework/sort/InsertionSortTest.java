@@ -15,7 +15,6 @@
  */
 package com.hudhaifa.sortframework.sort;
 
-import com.hudhaifa.sortframework.sort.InsertionSort;
 import com.hudhaifa.sortframework.util.ArrayUtil;
 import java.util.Arrays;
 import org.junit.After;

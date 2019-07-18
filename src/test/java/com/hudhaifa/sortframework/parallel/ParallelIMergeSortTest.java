@@ -15,7 +15,6 @@
  */
 package com.hudhaifa.sortframework.parallel;
 
-import com.hudhaifa.sortframework.parallel.ParallelIMergeSort;
 import com.hudhaifa.sortframework.util.ArrayUtil;
 import java.util.Arrays;
 import org.junit.After;

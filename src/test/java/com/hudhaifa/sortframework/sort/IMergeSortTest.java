@@ -4,7 +4,6 @@
  */
 package com.hudhaifa.sortframework.sort;
 
-import com.hudhaifa.sortframework.sort.IMergeSort;
 import com.hudhaifa.sortframework.util.ArrayUtil;
 import java.util.Arrays;
 import org.junit.After;

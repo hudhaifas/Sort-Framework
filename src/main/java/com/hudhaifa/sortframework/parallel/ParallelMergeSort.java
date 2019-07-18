@@ -15,21 +15,22 @@
  */
 package com.hudhaifa.sortframework.parallel;
 
-import com.hudhaifa.sortframework.algo.sort.Sort;
+import com.hudhaifa.sortframework.core.AbstractSort;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
 
 /**
- * This class implements a parallel version of the Merge sort algorithm which is a fork each task to work in
- * different process. This algorithm offers O(n log(n)) complexity in a single processor machine but it is
- * typically faster than traditional Merge sort implementations in the big data sets and multi processor
- * machines.
+ * This class implements a parallel version of the Merge sort algorithm which is
+ * a fork each task to work in different process. This algorithm offers O(n
+ * log(n)) complexity in a single processor machine but it is typically faster
+ * than traditional Merge sort implementations in the big data sets and multi
+ * processor machines.
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Oct 13, 2013 - 10:45:54 PM
  */
 public class ParallelMergeSort
-        extends Sort {
+        extends AbstractSort {
 
     @Override
     public String getName() {
@@ -44,6 +45,7 @@ public class ParallelMergeSort
 
         helper = new int[arr.length];
         System.arraycopy(arr, 0, helper, 0, arr.length);
+        addUnits(arr.length);
 
         ForkJoinPool pool = new ForkJoinPool();
         pool.invoke(new ParallelDivide(0, arr.length - 1));
@@ -80,7 +82,7 @@ public class ParallelMergeSort
                 return;
             }
 
-            notifyCursor(left, right);
+            updateCursors(left, right);
 
             // Calculates the middle of the array.
             int middle = left + length / 2;
@@ -105,32 +107,36 @@ public class ParallelMergeSort
         private void merge(int left, int middle, int right) {
             int targetCount = left, leftCount = left, rightCount = middle + 1;
 
-            notifyCursor(left, right);
+            updateCursors(left, right);
 
             // Adding the smaller value from each array in each loop.
             while (leftCount <= middle && rightCount <= right) {
+                addUnit();
                 if (isLess(helper[leftCount], helper[rightCount])) {
                     arr[targetCount++] = helper[leftCount++];
-                    notifyCursor(targetCount, leftCount);
+                    updateCursors(targetCount, leftCount);
                 } else {
                     arr[targetCount++] = helper[rightCount++];
-                    notifyCursor(targetCount, rightCount);
+                    updateCursors(targetCount, rightCount);
                 }
             }
 
             // Adding the rest values of the left array
             while (leftCount <= middle) {
+                addUnit();
                 arr[targetCount++] = helper[leftCount++];
-                notifyCursor(targetCount, leftCount);
+                updateCursors(targetCount, leftCount);
             }
 
             // Adding the rest values of the right array
             while (rightCount <= right) {
+                addUnit();
                 arr[targetCount++] = helper[rightCount++];
-                notifyCursor(targetCount, rightCount);
+                updateCursors(targetCount, rightCount);
             }
 
             for (int i = left; i <= right; i++) {
+                addUnit();
                 helper[i] = arr[i];
             }
         }
@@ -141,8 +147,8 @@ public class ParallelMergeSort
 
     private int[] helper;
     /**
-     * If the length of an array or sub array is less than the threshold, Insertion sort is used rather than
-     * Merge sort.
+     * If the length of an array or sub array is less than the threshold,
+     * Insertion sort is used rather than Merge sort.
      */
     private static final int SINGLETHREAD_THRESHOLD = 45;
 }

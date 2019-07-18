@@ -15,21 +15,22 @@
  */
 package com.hudhaifa.sortframework.parallel;
 
-import com.hudhaifa.sortframework.algo.sort.Sort;
+import com.hudhaifa.sortframework.core.AbstractSort;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
 
 /**
- * This is a parallel implementation of the IMerge sort algorithm which is a combination of merge sort
- * algorithm and insertion sort algorithm based on the array size. This algorithm offers O(n log(n))
- * complexity in a single processor machines but it is typically faster than traditional Merge sort
+ * This is a parallel implementation of the IMerge sort algorithm which is a
+ * combination of merge sort algorithm and insertion sort algorithm based on the
+ * array size. This algorithm offers O(n log(n)) complexity in a single
+ * processor machines but it is typically faster than traditional Merge sort
  * implementations in the big data sets and multi processor machines.
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Oct 13, 2013 - 10:45:54 PM
  */
 public class ParallelIMergeSort
-        extends Sort {
+        extends AbstractSort {
 
     @Override
     public String getName() {
@@ -44,6 +45,7 @@ public class ParallelIMergeSort
 
         helper = new int[arr.length];
         System.arraycopy(arr, 0, helper, 0, arr.length);
+        addUnits(arr.length);
 
         ForkJoinPool pool = new ForkJoinPool();
         pool.invoke(new ParallelDivide(0, arr.length - 1));
@@ -76,7 +78,7 @@ public class ParallelIMergeSort
                 return;
             }
 
-            notifyCursor(left, right);
+            updateCursors(left, right);
 
             // Calculates the middle of the array.
             int middle = left + length / 2;
@@ -91,7 +93,7 @@ public class ParallelIMergeSort
         }
 
         /**
-         * Sort the array or sub array by insertion sort.
+         * AbstractSort the array or sub array by insertion sort.
          *
          * @param left the start index
          * @param right the end index
@@ -103,11 +105,12 @@ public class ParallelIMergeSort
                 temp = arr[i];
                 int j;
                 for (j = i; j > left && isLess(temp, arr[j - 1]); j--) {
+                    addUnit();
                     swap(j, j - 1);
-                    notifyCursor(i, j);
+                    updateCursors(i, j);
                 }
                 arr[j] = temp;
-                notifyCursor(i);
+                updateCursor(i);
             }
             updateHelper(left, right);
         }
@@ -122,29 +125,32 @@ public class ParallelIMergeSort
         private void merge(int left, int middle, int right) {
             int targetCount = left, leftCount = left, rightCount = middle + 1;
 
-            notifyCursor(left, right);
+            updateCursors(left, right);
 
             // Adding the smaller value from each array in each loop.
             while (leftCount <= middle && rightCount <= right) {
+                addUnit();
                 if (isLess(helper[leftCount], helper[rightCount])) {
                     arr[targetCount++] = helper[leftCount++];
-                    notifyCursor(targetCount, leftCount);
+                    updateCursors(targetCount, leftCount);
                 } else {
                     arr[targetCount++] = helper[rightCount++];
-                    notifyCursor(targetCount, rightCount);
+                    updateCursors(targetCount, rightCount);
                 }
             }
 
             // Adding the rest values of the left array
             while (leftCount <= middle) {
+                addUnit();
                 arr[targetCount++] = helper[leftCount++];
-                notifyCursor(targetCount, leftCount);
+                updateCursors(targetCount, leftCount);
             }
 
             // Adding the rest values of the right array
             while (rightCount <= right) {
+                addUnit();
                 arr[targetCount++] = helper[rightCount++];
-                notifyCursor(targetCount, rightCount);
+                updateCursors(targetCount, rightCount);
             }
 
             updateHelper(left, right);
@@ -156,8 +162,8 @@ public class ParallelIMergeSort
 
     private int[] helper;
     /**
-     * If the length of an array or sub array is less than the threshold, Insertion sort is used rather than
-     * Merge sort.
+     * If the length of an array or sub array is less than the threshold,
+     * Insertion sort is used rather than Merge sort.
      */
     private static final int SINGLETHREAD_THRESHOLD = 45;
 }

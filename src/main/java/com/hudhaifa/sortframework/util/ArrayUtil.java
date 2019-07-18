@@ -16,8 +16,8 @@
 package com.hudhaifa.sortframework.util;
 
 /**
- * This is a utility class helps in generating arrays in certain forms, to be used in comparing sorting
- * algorithms:
+ * This is a utility class helps in generating arrays in certain forms, to be
+ * used in comparing sorting algorithms:
  * <ul>
  * <li>Reverse order (non-repeated elements)</li>
  * <li>Nearly sorted (non-repeated elements)</li>
@@ -70,7 +70,8 @@ public class ArrayUtil {
     }
 
     /**
-     * Creates an array of size n and filled with nearly sorted random numbers from 0..(n - 1).
+     * Creates an array of size n and filled with nearly sorted random numbers
+     * from 0..(n - 1).
      *
      * @param n Size of the array
      * @param g Group size
@@ -93,7 +94,8 @@ public class ArrayUtil {
     }
 
     /**
-     * Creates an array of size n and filled with nearly sorted random numbers from 0..(n - 1).
+     * Creates an array of size n and filled with nearly sorted random numbers
+     * from 0..(n - 1).
      *
      * @param n Size of the array
      * @param g Group size

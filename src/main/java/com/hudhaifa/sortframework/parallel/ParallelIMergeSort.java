@@ -22,12 +22,13 @@ import java.util.concurrent.RecursiveAction;
 /**
  * This is a parallel implementation of the IMerge sort algorithm which is a
  * combination of merge sort algorithm and insertion sort algorithm based on the
- * array size. This algorithm offers O(n log(n)) complexity in a single
+ * array size. This algorithm offers: O(n log(n)) complexity in a single
  * processor machines but it is typically faster than traditional Merge sort
- * implementations in the big data sets and multi processor machines.
+ * implementations in the big data sets and multi processor machines
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Oct 13, 2013 - 10:45:54 PM
+ * @since sort-framework v1.0
  */
 public class ParallelIMergeSort
         extends AbstractSort {

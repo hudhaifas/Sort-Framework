@@ -28,6 +28,7 @@ import java.util.concurrent.RecursiveAction;
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Oct 13, 2013 - 10:45:54 PM
+ * @since sort-framework v1.0
  */
 public class ParallelMergeSort
         extends AbstractSort {

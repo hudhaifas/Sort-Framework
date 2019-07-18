@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hudhaifa.sortframework.algo.sort;
+package com.hudhaifa.sortframework.sort;
 
-import com.hudhaifa.sortframework.algo.sort.ShuffleSort;
+import com.hudhaifa.sortframework.sort.FourSort;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,25 +25,24 @@ import static org.junit.Assert.assertArrayEquals;
 /**
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
- * @version 1.0, Oct 11, 2013 - 8:45:27 AM
+ * @version 1.0, Oct 11, 2013 - 8:54:43 AM
  */
-public class ShuffleSortTest {
+public class Sort4Test {
 
-    public ShuffleSortTest() {
+    public Sort4Test() {
     }
 
     @Before
     public void setUp() {
-        instance = new ShuffleSort();
+        instance = new FourSort();
     }
 
     @After
     public void tearDown() {
-        instance = null;
     }
 
     /**
-     * Test of sort method, of class BubbleSort.
+     * Test of sort method, of class FourSort.
      */
     @Test
     public void testSort() {
@@ -58,7 +57,7 @@ public class ShuffleSortTest {
 
         assertArrayEquals(a, b);
     }
-    private ShuffleSort instance;
-    private int[] a = {2, 1, 5, 0, 5, 4};
-    private int[] b = {0, 1, 2, 4, 5, 5};
+    private FourSort instance;
+    private int[] a = {2, 1, 5, 0};
+    private int[] b = {0, 1, 2, 5};
 }

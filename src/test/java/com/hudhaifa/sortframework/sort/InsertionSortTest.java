@@ -13,9 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hudhaifa.sortframework.algo.sort;
+package com.hudhaifa.sortframework.sort;
 
-import com.hudhaifa.sortframework.algo.sort.BubbleSort;
+import com.hudhaifa.sortframework.sort.InsertionSort;
+import com.hudhaifa.sortframework.util.ArrayUtil;
+import java.util.Arrays;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,16 +27,19 @@ import static org.junit.Assert.assertArrayEquals;
 /**
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
- * @version 1.0, Oct 11, 2013 - 8:45:27 AM
+ * @version 1.0, Oct 11, 2013 - 8:19:58 AM
  */
-public class BubbleSortTest {
+public class InsertionSortTest {
 
-    public BubbleSortTest() {
+    public InsertionSortTest() {
     }
 
     @Before
     public void setUp() {
-        instance = new BubbleSort();
+        instance = new InsertionSort();
+        a = ArrayUtil.random(100);
+        b = ArrayUtil.cloneArray(a);
+        Arrays.sort(b);
     }
 
     @After
@@ -43,7 +48,7 @@ public class BubbleSortTest {
     }
 
     /**
-     * Test of sort method, of class BubbleSort.
+     * Test of sort method, of class InsertionSort.
      */
     @Test
     public void testSort() {
@@ -55,10 +60,28 @@ public class BubbleSortTest {
         System.out.println("Array size: " + a.length);
         System.out.println("# Comparisons: " + instance.getComparisons());
         System.out.println("# Swaps: " + instance.getSwaps());
+        System.out.println("# Compexity: " + instance.getTimeCompleixty());
 
         assertArrayEquals(a, b);
     }
-    private BubbleSort instance;
-    private int[] a = {2, 1, 5, 0, 5, 4};
-    private int[] b = {0, 1, 2, 4, 5, 5};
+
+    /**
+     * Test of sort method, of class InsertionSort.
+     */
+    @Test
+    public void testSort2() {
+        System.out.println("Recursive sort");
+
+        instance.reset(a);
+        instance.sort(a.length);
+
+        System.out.println("Array size: " + a.length);
+        System.out.println("# Comparisons: " + instance.getComparisons());
+        System.out.println("# Swaps: " + instance.getSwaps());
+
+        assertArrayEquals(a, b);
+    }
+    private InsertionSort instance;
+    private int[] a;
+    private int[] b;
 }

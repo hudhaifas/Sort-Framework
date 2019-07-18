@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.hudhaifa.sortframework.algo.sort;
+package com.hudhaifa.sortframework.sort;
 
-import com.hudhaifa.sortframework.algo.sort.IMergeSort;
+import com.hudhaifa.sortframework.sort.IMergeSort;
 import com.hudhaifa.sortframework.util.ArrayUtil;
 import java.util.Arrays;
 import org.junit.After;

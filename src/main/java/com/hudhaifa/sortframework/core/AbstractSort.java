@@ -136,6 +136,8 @@ public abstract class AbstractSort
      * The algorithm finished sorting.
      */
     protected final void finish() {
+        endTime = System.nanoTime();
+
         if (listener != null) {
             listener.sortFinished();
         }
@@ -258,7 +260,10 @@ public abstract class AbstractSort
             return 0;
         }
 
-        return System.nanoTime() - beginTime;
+        // if the task is not finished read the system current time.
+        long end = endTime != -1 ? endTime : System.nanoTime();
+        
+        return end - beginTime;
     }
 
     /**
@@ -332,9 +337,13 @@ public abstract class AbstractSort
      */
     protected int slaveCursor;
     /**
-     * the total time to execute the sort task
+     * the time at start executing the sort task
      */
     protected long beginTime = -1;
+    /**
+     * the time at end executing the sort task
+     */
+    protected long endTime = -1;
     /**
      * Formats the elapsed time
      */

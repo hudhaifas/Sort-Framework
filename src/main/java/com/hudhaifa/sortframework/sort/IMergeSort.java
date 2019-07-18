@@ -20,11 +20,20 @@ import com.hudhaifa.sortframework.core.AbstractSort;
 /**
  * This class implements the IMerge sort algorithm which is a combination of
  * merge sort algorithm and insertion sort algorithm based on the array size.
- * This algorithm offers O(n log(n)) complexity but it is typically faster than
- * traditional Merge sort implementations in the big data sets.
+ * This algorithm offers:
+ *
+ * <ul>
+ * <li>Best case: n log n, but it is typically faster than traditional Merge
+ * sort implementations in the big data sets
+ * <li>Average case: n log n
+ * <li>Worst case: n log n
+ * <li>Space: n
+ * </ul>
+ *
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Oct 13, 2013 - 10:34:20 PM
+ * @since sort-framework v1.0
  */
 public class IMergeSort
         extends AbstractSort {

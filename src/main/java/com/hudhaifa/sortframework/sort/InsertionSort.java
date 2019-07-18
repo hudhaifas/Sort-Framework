@@ -19,8 +19,14 @@ import com.hudhaifa.sortframework.core.AbstractSort;
 
 /**
  * This class implements the Insertion sort algorithm by inserting each element
- * in its convenient place in the array. This algorithm offers O(n^2)
- * complexity.
+ * in its convenient place in the array. This algorithm offers:
+ *
+ * <ul>
+ * <li>Best case: n
+ * <li>Average case: n^2
+ * <li>Worst case: n^2
+ * <li>Space: 1
+ * </ul>
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Oct 7, 2013 - 2:58:50 PM

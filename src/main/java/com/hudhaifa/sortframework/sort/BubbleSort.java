@@ -19,11 +19,17 @@ import com.hudhaifa.sortframework.core.AbstractSort;
 
 /**
  * This class implements the Bubble sort algorithm which starts finding the
- * largest value and moving it to the end of the array. This algorithm offers
- * O(n^2) complexity.
+ * largest value and moving it to the end of the array.
  *
  * The Bubble sort is the opposite of the Shuffle sort, it starts sorting the
- * largest value.
+ * largest value. This algorithm offers:
+ *
+ * <ul>
+ * <li>Best case: n
+ * <li>Average case: n^2
+ * <li>Worst case: n^2
+ * <li>Space: 1
+ * </ul>
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Sep 24, 2013 - 5:44:14 PM

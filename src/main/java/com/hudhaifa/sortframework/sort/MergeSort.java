@@ -19,11 +19,18 @@ import com.hudhaifa.sortframework.core.AbstractSort;
 
 /**
  * This class implements the traditional Merge sort algorithm by dividing the
- * array into two array in each loop iteration. This algorithm offers O(n
- * log(n)) complexity.
+ * array into two array in each loop iteration. This algorithm offers:
+ *
+ * <ul>
+ * <li>Best case: n log n
+ * <li>Average case: n log n
+ * <li>Worst case: n log n
+ * <li>Space: n
+ * </ul>
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Oct 13, 2013 - 10:09:56 PM
+ * @since sort-framework v1.0
  */
 public class MergeSort
         extends AbstractSort {

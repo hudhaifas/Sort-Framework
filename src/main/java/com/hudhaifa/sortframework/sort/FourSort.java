@@ -23,6 +23,7 @@ import com.hudhaifa.sortframework.core.AbstractSort;
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Oct 8, 2013 - 9:32:46 PM
+ * @since sort-framework v1.0
  */
 public class FourSort
         extends AbstractSort {

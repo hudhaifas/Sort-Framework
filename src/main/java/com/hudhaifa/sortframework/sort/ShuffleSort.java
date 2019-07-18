@@ -19,8 +19,15 @@ import com.hudhaifa.sortframework.core.AbstractSort;
 
 /**
  * This class implements the Shuffle sort algorithm which starts finding the
- * smallest value and moving it to the start of the array. This algorithm is the
- * opposite of the Bubble sort and offers O(n^2) complexity.
+ * smallest value and moving it to the start of the array. It is the opposite of
+ * the Bubble sort and offers O(n^2) complexity. This algorithm offers:
+ *
+ * <ul>
+ * <li>Best case: n
+ * <li>Average case: n^2
+ * <li>Worst case: n^2
+ * <li>Space: 1
+ * </ul>
  *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Sep 24, 2013 - 5:44:14 PM

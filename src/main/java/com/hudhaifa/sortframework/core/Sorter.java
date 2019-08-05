@@ -15,8 +15,11 @@
  */
 package com.hudhaifa.sortframework.core;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,7 +34,7 @@ import javax.swing.JSeparator;
  */
 public final class Sorter
         extends JPanel
-        implements Runnable, AbstractSort.SortListener {
+        implements Runnable, AbstractSort.SortListener, ComponentListener {
 
     /**
      * Initialize sorter instance for a specific sort algorithm and sort canvas.
@@ -152,7 +155,7 @@ public final class Sorter
     public void init(int[] arr) {
         model.reset(arr);
         view.reset(arr);
-        titleLabel.setText(model.getName());
+
         elementsValue.setText(Integer.toString(arr.length));
 
         // Check if the sorting thread is already running.
@@ -172,31 +175,25 @@ public final class Sorter
     }
 
     /**
-     * Terminate the sort loop
-     */
-    @Override
-    public void sortFinished() {
-        isExit = true;
-    }
-
-    /**
      * Initializes counter labels.
      */
     private void initComponents() {
         this.model.setListener(this);
-        setBorder(BorderFactory.createEtchedBorder());
+        setBorder(BorderFactory.createTitledBorder(model.getName()));
 
         sortPanel = new JPanel() {
             @Override
             public void paint(Graphics g) {
+                g.setColor(Color.WHITE);
+                g.fillRect(0, 0, getWidth(), getHeight());
                 if (view != null && (state == STATE_WORKING)) {
                     view.paint(g);
                 }
             }
         };
         sortPanel.setDoubleBuffered(true);
+        sortPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        titleLabel = new javax.swing.JLabel();
         statusBar = new javax.swing.JPanel();
         elementsLabel = new javax.swing.JLabel();
         elementsValue = new javax.swing.JLabel();
@@ -212,9 +209,6 @@ public final class Sorter
         separator4 = new javax.swing.JSeparator();
         swapsLabel = new javax.swing.JLabel();
         swapsValue = new javax.swing.JLabel();
-
-        titleLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        titleLabel.setText("Sort Name");
 
         elementsLabel.setText("Elements:");
         elementsValue.setText("0");
@@ -239,32 +233,32 @@ public final class Sorter
         statusBar.setLayout(statusBarLayout);
         statusBarLayout.setHorizontalGroup(
                 statusBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, statusBarLayout.createSequentialGroup()
-                                .addContainerGap(342, Short.MAX_VALUE)
+                        .addGroup(statusBarLayout.createSequentialGroup()
+                                .addGap(4, 4, 4)
                                 .addComponent(elementsLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(elementsValue)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(separator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(timeLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(timeValue)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(separator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(complexityLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(complexityValue)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(separator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(comparisonsLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(comparisonsValue)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(separator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(swapsLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(swapsValue)
@@ -273,48 +267,41 @@ public final class Sorter
         statusBarLayout.setVerticalGroup(
                 statusBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, statusBarLayout.createSequentialGroup()
-                                .addContainerGap()
+                                .addGap(4, 4, 4)
                                 .addGroup(statusBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(separator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(separator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(separator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(statusBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(swapsLabel)
-                                                .addComponent(swapsValue)
-                                                .addComponent(complexityLabel)
-                                                .addComponent(complexityValue)
-                                                .addComponent(elementsValue)
-                                                .addComponent(elementsLabel)
-                                                .addComponent(timeLabel)
-                                                .addComponent(timeValue)
-                                                .addComponent(comparisonsLabel)
-                                                .addComponent(comparisonsValue))
+                                        .addComponent(swapsLabel)
+                                        .addComponent(swapsValue)
+                                        .addComponent(complexityLabel)
+                                        .addComponent(complexityValue)
+                                        .addComponent(elementsValue)
+                                        .addComponent(elementsLabel)
+                                        .addComponent(timeLabel)
+                                        .addComponent(timeValue)
+                                        .addComponent(comparisonsLabel)
+                                        .addComponent(comparisonsValue)
                                         .addComponent(separator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())
+                                .addGap(4, 4, 4))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(statusBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(sortPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(titleLabel)
-                                                .addGap(0, 0, Short.MAX_VALUE)))
-                                .addContainerGap())
+                                .addGap(4, 4, 4)
+                                .addComponent(sortPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(4, 4, 4))
+                        .addComponent(statusBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(titleLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(sortPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(4, 4, 4)
+                                .addComponent(sortPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(4, 4, 4)
                                 .addComponent(statusBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }
@@ -329,6 +316,32 @@ public final class Sorter
         Dimension d = super.getMaximumSize();
         d.height = 100;
         return d;
+    }
+
+    /**
+     * Terminate the sort loop
+     */
+    @Override
+    public void sortFinished() {
+        isExit = true;
+    }
+
+    @Override
+    public void componentResized(ComponentEvent event) {
+        view.setSize(getWidth(), getHeight());
+        sortPanel.repaint();
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent event) {
+    }
+
+    @Override
+    public void componentShown(ComponentEvent event) {
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent event) {
     }
 
     /**
@@ -352,7 +365,6 @@ public final class Sorter
     /**
      * Sort algorithm name
      */
-    private JLabel titleLabel;
     private JPanel sortPanel;
     private JPanel statusBar;
     private JLabel elementsLabel;
@@ -393,5 +405,4 @@ public final class Sorter
      * Deactivate current sort and release resources.
      */
     private static final byte STATE_DEACTIVATED = 5;
-
 }

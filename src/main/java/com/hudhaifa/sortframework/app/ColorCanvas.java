@@ -39,7 +39,7 @@ public abstract class ColorCanvas
 
     @Override
     protected long tickDelay() {
-        return 500L;
+        return 50L;
     }
 
     protected Color lighten(Color inColor, double inAmount) {

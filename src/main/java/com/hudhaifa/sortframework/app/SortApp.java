@@ -26,17 +26,17 @@ import com.hudhaifa.sortframework.sort.InsertionSort;
 import com.hudhaifa.sortframework.sort.MergeSort;
 import com.hudhaifa.sortframework.sort.ShuffleSort;
 import com.hudhaifa.sortframework.util.ArrayUtil;
-import java.awt.Dimension;
+import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.Box;
+import javax.swing.JOptionPane;
 
 /**
  * Visualize sorting algorithms.
- * 
+ *
  * @author Hudhaifa Shatnawi <hudhaifa.shatnawi@gmail.com>
  * @version 1.0, Jul 16, 2019
  * @since sort-framework v1.1
@@ -91,12 +91,12 @@ public class SortApp
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         resetMenuItem = new javax.swing.JMenuItem();
-        takeOffMenuItem = new javax.swing.JMenuItem();
+        startMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sort Framework");
 
-        sortersPanel.setLayout(new javax.swing.BoxLayout(sortersPanel, javax.swing.BoxLayout.Y_AXIS));
+        sortersPanel.setLayout(new java.awt.GridLayout(0, 2));
 
         fileMenu.setText("File");
 
@@ -109,14 +109,14 @@ public class SortApp
         });
         fileMenu.add(resetMenuItem);
 
-        takeOffMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
-        takeOffMenuItem.setText("Take Off");
-        takeOffMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        startMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        startMenuItem.setText("Start");
+        startMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                takeOffMenuItemActionPerformed(evt);
+                startMenuItemActionPerformed(evt);
             }
         });
-        fileMenu.add(takeOffMenuItem);
+        fileMenu.add(startMenuItem);
 
         menuBar.add(fileMenu);
 
@@ -128,14 +128,14 @@ public class SortApp
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sortersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)
+                .addComponent(sortersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 836, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sortersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
+                .addComponent(sortersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -174,30 +174,33 @@ public class SortApp
         for (int i = 0; i < sorters.size(); i++) {
             Sorter sorter = sorters.get(i);
             sortersPanel.add(sorter);
-            sortersPanel.add(getFiller());
         }
     }
 
-    /**
-     * Returns filler components for the Box layout
-     * @return filler components for the Box layout
-     */
-    private Box.Filler getFiller() {
-        return new Box.Filler(new Dimension(0, 10), new Dimension(0, 10), new Dimension(0, 10));
-    }
-
     private void resetMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetMenuItemActionPerformed
-        int[] arr = fill(ArrayUtil.FILL_RANDOM, 100000);
+        int size = 0;
+
+        try {
+            String sizeValue = JOptionPane.showInputDialog(this, "Enter the array size:");
+            size = Integer.parseInt(sizeValue);
+        } catch (HeadlessException | NumberFormatException e) {
+        }
+
+        if (size <= 0) {
+            return;
+        }
+
+        int[] arr = fill(ArrayUtil.FILL_RANDOM, size);
         sorters.forEach((sorter) -> {
             sorter.init(Arrays.copyOf(arr, arr.length));
         });
     }//GEN-LAST:event_resetMenuItemActionPerformed
 
-    private void takeOffMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_takeOffMenuItemActionPerformed
+    private void startMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startMenuItemActionPerformed
         sorters.forEach((sorter) -> {
             sorter.startSort();
         });
-    }//GEN-LAST:event_takeOffMenuItemActionPerformed
+    }//GEN-LAST:event_startMenuItemActionPerformed
 
     /**
      * Fills the array in on of the following orders:
@@ -235,7 +238,7 @@ public class SortApp
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem resetMenuItem;
     private javax.swing.JPanel sortersPanel;
-    private javax.swing.JMenuItem takeOffMenuItem;
+    private javax.swing.JMenuItem startMenuItem;
     // End of variables declaration//GEN-END:variables
 
     /**
